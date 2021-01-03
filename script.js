@@ -1,4 +1,4 @@
-const api = "https://disease.sh1/v3/covid-19/historical/indonesia?lastdays=30";
+const api = "https://disease.sh/v3/covid-19/historical/indonesia?lastdays=30";
 
 var ctx = document.getElementById("myChart").getContext("2d");
 
