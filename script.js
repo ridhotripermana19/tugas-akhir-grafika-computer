@@ -1,8 +1,23 @@
 // URL Endpoint dari Web Service / REST API
 const api = "https://disease.sh/v3/covid-19/historical/indonesia?lastdays=30";
 
-// Mengambil drawing context dengan tipe drawing context 2D dari canvas
-var ctx = document.getElementById("myChart").getContext("2d");
+// Mengambil Canvas element dari document HTML.
+const canvas = document.getElementById("myChart");
+
+// Set lebar dari canvas.
+canvas.width =
+  window.innerWidth ||
+  document.documentElement.clientWidth ||
+  document.body.clientWidth;
+
+// Set tinggi dari canvas.
+canvas.height =
+  window.innerHeight ||
+  document.documentElement.clientHeight ||
+  document.body.clientHeight;
+
+// Mengambil drawing context dari canvas, dengan tipe drawing context 2d.
+const ctx = canvas.getContext("2d");
 
 class Covid {
   constructor(jsonResponse) {
@@ -106,7 +121,7 @@ Covid.getData().then((covid) => {
           // Data didapatkan dari property deaths yang diakses dari object covid.
           data: covid.deaths,
           // Warna garis atau border dari grafik batang yang diberikan.
-          borderColor: "rgba(255, 99, 132)",
+          borderColor: "rgba(153, 102, 255, 1)",
           // Tidak memberikan warna didalam grafik batang.
           fill: false,
         },
@@ -118,7 +133,7 @@ Covid.getData().then((covid) => {
           // Data didapatkan dari property recovered yang diakses dari object covid.
           data: covid.recovered,
           // Warna garis atau border dari grafik batang yang diberikan.
-          borderColor: "rgba(255, 99, 132)",
+          borderColor: "rgba(75, 192, 192, 1)",
           // Tidak memberikan warna didalam grafik batang.
           fill: false,
         },
@@ -129,6 +144,11 @@ Covid.getData().then((covid) => {
     type: "line",
     // Opsi saat menampilkan grafik.
     options: {
+      // Resize / Membuat chart size berdasarkan window size
+      responsive: true,
+      // Maintain / menjaga original aspect ratio dari canvas
+      // ketika resizing.
+      maintainAspectRatio: true,
       // Menetapkan skala untuk X-Axis dan Y-Axis dari grafik.
       scales: {
         yAxes: [
